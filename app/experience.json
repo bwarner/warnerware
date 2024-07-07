@@ -1,0 +1,38 @@
+[
+  {
+    "companyName": "Oncue",
+    "companyLink": "https://www.oncue.co/",
+    "jobTitle": "Director of Engineering",
+    "servicePeriod": "May 2020 – 2023"
+  },
+  {
+    "companyName": "Healthline Media",
+    "companyLink": "https://www.healthline.com/",
+    "jobTitle": "Principal Software Engineer",
+    "servicePeriod": "August 2016 – 2020"
+  },
+  {
+    "companyName": "OpenTable",
+    "companyLink": "https://www.opentable.com/",
+    "jobTitle": "Principal Software Engineer",
+    "servicePeriod": "March 2016 – 2016"
+  },
+  {
+    "companyName": "Constant Contact",
+    "companyLink": "https://www.constantcontact.com/",
+    "jobTitle": "Principal Software Engineer",
+    "servicePeriod": "June 2013 – 2016"
+  },
+  {
+    "companyName": "Gap Inc.",
+    "companyLink": "https://www.gap.com/",
+    "jobTitle": "Senior UI Developer (Contract)",
+    "servicePeriod": "March 2012 – 2013"
+  },
+  {
+    "companyName": "Walmart",
+    "companyLink": "https://www.walmart.com/",
+    "jobTitle": "Senior Software Engineer",
+    "servicePeriod": "September2010 – 2011"
+  }
+]

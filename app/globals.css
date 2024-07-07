@@ -17,17 +17,25 @@
 }
 
 body {
+  @apply font-serif;
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: white
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+
+:target, a:target-within {
+  @apply text-blue-200;
+}
+
+
+
+:target, :target-within {
+  background-color: blueviolet;
+  outline: green;
 }
