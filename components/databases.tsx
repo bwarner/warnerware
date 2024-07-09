@@ -31,7 +31,7 @@ export default function Databases({ id, className }: ToolsProps) {
         Databases
       </h1>
       <p className="pb-3">
-        These are the database that I&quote;m proficient with:
+        These are the database that I&apos;m proficient with:
       </p>
       <dl className="grid grid-cols-tools md:grid-cols-toolsMid gap-6">
         {tools.map((tool) => (

@@ -57,7 +57,7 @@ export default function Home() {
         </div>
         <div className="order flex flex-col justify-center text-4xl lg:text-lg">
           <h3 className="text-[32px] leading-9 pb-3">
-            Hello, I&apos;m Byron, a software engineer and entrepreneur , based
+            Hello, I&apos;m Byron, a software engineer and entrepreneur, based
             in San Francisco.
           </h3>
           <p className="text-[18px]">
