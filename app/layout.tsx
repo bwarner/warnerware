@@ -3,6 +3,7 @@ import cn from "clsx";
 import Script from "next/script";
 import { ptSerif } from "./fonts";
 import "./globals.css";
+import { CSPostHogProvider } from "./providers";
 
 export const metadata: Metadata = {
   title: "Byron's Personal Page",
@@ -36,7 +37,7 @@ export default function RootLayout({
       <body
         className={cn(ptSerif.variable, "color-white-900", "text-gray-600")}
       >
-        {children}
+        <CSPostHogProvider>{children}</CSPostHogProvider>
       </body>
     </html>
   );
