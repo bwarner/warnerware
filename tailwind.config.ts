@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import { montserrat } from "./app/fonts";
 
 const config: Config = {
   content: [

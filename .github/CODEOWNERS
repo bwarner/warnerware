@@ -1,0 +1,24 @@
+# CODEOWNERS for warnerware.com
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything in the repo
+* @bwarner
+
+# App routes
+/app/ @bwarner
+
+# Components
+/components/ @bwarner
+
+# Content (future blog posts)
+/content/ @bwarner
+
+# Configuration files
+next.config.mjs @bwarner
+package.json @bwarner
+tsconfig.json @bwarner
+tailwind.config.ts @bwarner
+
+# Security-sensitive files
+.env* @bwarner
+

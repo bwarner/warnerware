@@ -1,7 +1,5 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { siGithub, siLinkedin, siX } from "simple-icons";
 import { Icon } from "@/components/icon";
 import Tools from "@/components/tools";
@@ -51,8 +49,7 @@ export default function Home() {
             width={800}
             height={1000}
             sizes="(max-width: 600px) 100vw, 50vw"
-            objectFit="contain"
-            className="mx-auto"
+            className="mx-auto object-contain"
           />
         </div>
         <div className="order flex flex-col justify-center text-4xl lg:text-lg">
@@ -121,7 +118,7 @@ export default function Home() {
                   servicePeriod={servicePeriod}
                   jobTitle={jobTitle}
                 />
-              )
+              ),
             )}
           </div>
           <Tools id="tools" className="mt-10" />

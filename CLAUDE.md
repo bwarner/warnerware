@@ -8,7 +8,7 @@
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js 15 (App Router)
 - **Styling:** Tailwind CSS
 - **Language:** TypeScript
 - **Icons:** FontAwesome, Simple Icons, Lucide React
@@ -18,6 +18,7 @@
 ## Current State
 
 The site currently features:
+
 - Hero section with bio and social links (LinkedIn, GitHub, X)
 - Experience/work history timeline
 - Skills showcase
@@ -28,6 +29,7 @@ The site currently features:
 The site is being evolved from a static portfolio to a **blog-like personal site**. Key goals include:
 
 ### Content Features
+
 - [ ] Blog post support with MDX or similar
 - [ ] Post listings with pagination
 - [ ] Categories/tags for posts
@@ -35,6 +37,7 @@ The site is being evolved from a static portfolio to a **blog-like personal site
 - [ ] Search functionality
 
 ### Technical Improvements
+
 - [ ] Dynamic routing for blog posts (`/blog/[slug]`)
 - [ ] Static generation for blog content
 - [ ] SEO optimization (meta tags, Open Graph, structured data)
@@ -42,6 +45,7 @@ The site is being evolved from a static portfolio to a **blog-like personal site
 - [ ] Syntax highlighting for code blocks
 
 ### Design Considerations
+
 - [ ] Blog index page
 - [ ] Individual post layout
 - [ ] Navigation updates (add Blog link)
@@ -79,12 +83,14 @@ content/               # Blog content (to be created)
 ## Coding Conventions
 
 ### General
+
 - Use TypeScript for all new code
 - Prefer functional components with hooks
 - Use Tailwind CSS for styling (no CSS modules)
 - Follow Next.js App Router conventions
 
 ### Naming
+
 - Components: PascalCase (`BlogPost.tsx`)
 - Utilities: camelCase (`formatDate.ts`)
 - Routes: kebab-case (`/blog/my-first-post`)
@@ -112,6 +118,7 @@ content/               # Blog content (to be created)
 | Body | PT Serif | `--font-pt-serif` |
 
 **To align with brand guidelines**, add Roboto to `app/fonts.ts`:
+
 ```ts
 import { Roboto } from "next/font/google";
 
@@ -123,6 +130,7 @@ export const roboto = Roboto({
 ```
 
 **Tailwind extend:**
+
 ```js
 fontFamily: {
   roboto: ["var(--font-roboto)", "sans-serif"],
@@ -148,6 +156,7 @@ fontFamily: {
 **Currently used:** `blue-500` (`#3b82f6`) — close but not exact brand color.
 
 **To add brand color to `tailwind.config.ts`:**
+
 ```js
 theme: {
   extend: {
@@ -163,9 +172,10 @@ theme: {
 ```
 
 **CSS Variables (add to `globals.css`):**
+
 ```css
 :root {
-  --warnerware-blue: #277CEA;
+  --warnerware-blue: #277cea;
 }
 ```
 
@@ -196,4 +206,3 @@ npm run lint     # Run ESLint
 - Keep the portfolio content intact while adding blog functionality
 - PostHog is used for analytics - consider tracking blog-specific events
 - Prioritize performance and SEO for blog content
-

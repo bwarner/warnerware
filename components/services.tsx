@@ -1,12 +1,7 @@
 import {
   siStripe,
   siTwilio,
-  siGoogletagmanager,
-  siStatuspage,
-  siAtlassian,
-  siJira,
   siDropbox,
-  siMixpanel,
   siHeroku,
   siVercel,
   siAmazonecs,

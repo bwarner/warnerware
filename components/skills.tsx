@@ -1,4 +1,3 @@
-import Section from "./section";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCode,
