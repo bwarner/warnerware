@@ -9,7 +9,7 @@
 ## Tech Stack
 
 - **Framework:** Next.js 15 (App Router)
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS v4
 - **Language:** TypeScript
 - **Icons:** FontAwesome, Simple Icons, Lucide React
 - **Analytics:** PostHog

@@ -1,7 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* Custom theme configuration (migrated from tailwind.config.ts) */
+@theme {
+  /* Font families */
+  --font-serif: "--font-pt-serif", serif;
+  --font-montserrat: "--font-montserrat", sans-serif;
+
+  /* Custom grid templates */
+  --grid-template-columns-sidenav: 240px 1fr;
+  --grid-template-columns-experience: 10px 1fr 1fr 1fr;
+  --grid-template-columns-toolsMid: 10px 1fr 10px 1fr 10px 1fr 10px 1fr;
+  --grid-template-columns-tools: 10px 1fr 10px 1fr;
+  --grid-template-columns-skills: 32px 1fr;
+
+  /* Custom background images */
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
+
+  /* Custom list style image */
+  --list-style-image-circle: url("/images/circle.svg");
+}
+
+/* CSS Variables for theming */
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -19,23 +42,20 @@
 body {
   @apply font-serif;
   color: rgb(var(--foreground-rgb));
-  background: white
+  background: white;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+@utility text-balance {
+  text-wrap: balance;
 }
 
-
-:target, a:target-within {
+:target,
+a:target-within {
   @apply text-blue-200;
 }
 
-
-
-:target, :target-within {
+:target,
+:target-within {
   background-color: blueviolet;
   outline: green;
 }
