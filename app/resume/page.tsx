@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Download } from "lucide-react";
+import { ObfuscatedEmail, ObfuscatedPhone } from "@/components";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -8,9 +9,67 @@ export const metadata: Metadata = {
     "Byron Warner - Engineering leader with deep experience spanning full-stack development, team building, and product delivery.",
 };
 
+// Structured data for search engines (JSON-LD)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Byron Warner",
+  jobTitle: "Director of Engineering",
+  url: "https://warnerware.com",
+  sameAs: [
+    "https://www.linkedin.com/in/byronwarner/",
+    "https://github.com/bwarner",
+    "https://x.com/bewarned",
+  ],
+  // Only city-level location, no street address
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "San Francisco",
+    addressRegion: "CA",
+    addressCountry: "US",
+  },
+  alumniOf: [
+    {
+      "@type": "CollegeOrUniversity",
+      name: "Georgia Institute of Technology",
+      department: "Computer Science",
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "University of North Carolina at Chapel Hill",
+      department: "Mathematical Sciences",
+    },
+  ],
+  knowsAbout: [
+    "TypeScript",
+    "JavaScript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Ruby on Rails",
+    "AWS",
+    "PostgreSQL",
+    "GraphQL",
+    "iOS Development",
+    "Team Leadership",
+    "Agile Development",
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "Available for opportunities",
+  },
+  description:
+    "Engineering leader with deep experience spanning full-stack development, team building, and product delivery.",
+};
+
 export default function ResumePage() {
   return (
     <main className="min-h-screen px-6 py-12">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className="mx-auto max-w-4xl">
         {/* Header */}
         <header className="mb-8 pb-8 border-b-2 border-blue-600">
@@ -20,8 +79,14 @@ export default function ResumePage() {
                 Byron Warner
               </h1>
               <p className="mt-2 text-gray-600">
-                <strong className="text-gray-900">San Francisco, CA</strong> ·
-                415-819-1957 · bfwarner@gmail.com ·{" "}
+                <strong className="text-gray-900">San Francisco, CA</strong> ·{" "}
+                <ObfuscatedPhone parts={["415", "819", "1957"]} /> ·{" "}
+                <ObfuscatedEmail
+                  user="bfwarner"
+                  domain="gmail.com"
+                  className="text-blue-600 hover:underline"
+                />{" "}
+                ·{" "}
                 <Link
                   href="https://www.linkedin.com/in/byronwarner/"
                   className="text-blue-600 hover:underline"
