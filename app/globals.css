@@ -59,3 +59,17 @@ a:target-within {
   background-color: blueviolet;
   outline: green;
 }
+
+/* Scrolling animation for skills bar */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}

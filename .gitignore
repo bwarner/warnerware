@@ -1,6 +1,14 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 .vscode
 
+.claude/
+.playwright-mcp/
+.cursor/
+.cursorrules/
+.cursorrules.md
+.cursorignore
+.cursorignore.*
+
 # dependencies
 /node_modules
 /.pnp
