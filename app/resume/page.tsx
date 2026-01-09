@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Script from "next/script";
 import Link from "next/link";
 import { Download } from "lucide-react";
 import { ObfuscatedEmail, ObfuscatedPhone, TrackedLink } from "@/components";
@@ -66,11 +65,9 @@ const jsonLd = {
 export default function ResumePage() {
   return (
     <>
-      {/* JSON-LD Structured Data - placed in head for Google */}
-      <Script
-        id="resume-jsonld"
+      {/* JSON-LD Structured Data for Google Rich Results */}
+      <script
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="min-h-screen px-6 py-12">
