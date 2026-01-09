@@ -12,8 +12,11 @@
 - **Styling:** Tailwind CSS v4
 - **Language:** TypeScript
 - **Icons:** FontAwesome, Simple Icons, Lucide React
-- **Analytics:** PostHog
-- **Deployment:** Vercel (assumed)
+- **Analytics:** PostHog (with exception & performance tracking)
+- **Testing:** Vitest + React Testing Library
+- **Linting:** ESLint 9 (flat config) + Prettier
+- **Git Hooks:** Husky + lint-staged
+- **CI/CD:** GitHub Actions → Vercel
 
 ## Current State
 
@@ -23,6 +26,8 @@ The site currently features:
 - Experience/work history timeline
 - Skills showcase
 - Tools, Databases, and Services sections
+- Resume page with JSON-LD structured data
+- Blog section (MDX-based)
 
 ## Transformation Goals
 
@@ -30,7 +35,7 @@ The site is being evolved from a static portfolio to a **blog-like personal site
 
 ### Content Features
 
-- [ ] Blog post support with MDX or similar
+- [x] Blog post support with MDX
 - [ ] Post listings with pagination
 - [ ] Categories/tags for posts
 - [ ] RSS feed
@@ -38,47 +43,52 @@ The site is being evolved from a static portfolio to a **blog-like personal site
 
 ### Technical Improvements
 
-- [ ] Dynamic routing for blog posts (`/blog/[slug]`)
-- [ ] Static generation for blog content
-- [ ] SEO optimization (meta tags, Open Graph, structured data)
+- [x] Dynamic routing for blog posts (\`/blog/[slug]\`)
+- [x] Static generation for blog content
+- [x] SEO optimization (meta tags, Open Graph, structured data)
 - [ ] Reading time estimates
 - [ ] Syntax highlighting for code blocks
 
 ### Design Considerations
 
-- [ ] Blog index page
-- [ ] Individual post layout
-- [ ] Navigation updates (add Blog link)
+- [x] Blog index page
+- [x] Individual post layout
+- [x] Navigation updates (add Blog link)
 - [ ] Archive/category pages
 - [ ] Author section on posts
 
 ## File Structure
 
-```
-long_resume.md         # resume
+\`\`\`
+long_resume.md # resume
 app/
-├── page.tsx           # Homepage (portfolio content)
-├── layout.tsx         # Root layout
-├── globals.css        # Global styles
-├── blog/              # Blog section (to be created)
-│   ├── page.tsx       # Blog index
-│   └── [slug]/
-│       └── page.tsx   # Individual post
-├── experience.json    # Work history data
+├── page.tsx # Homepage (portfolio content)
+├── layout.tsx # Root layout
+├── globals.css # Global styles (Tailwind v4)
+├── providers.tsx # PostHog provider
+├── fonts.ts # Font configuration
+├── blog/ # Blog section
+│ ├── page.tsx # Blog index
+│ └── [slug]/
+│ └── page.tsx # Individual post
+├── resume/
+│ └── page.tsx # Resume with JSON-LD
+├── experience.json # Work history data
 └── ...
 
 components/
-├── section.tsx        # Reusable section wrapper
-├── skills.tsx         # Skills display
-├── tools.tsx          # Tools section
-├── databases.tsx      # Databases section
-├── services.tsx       # Services section
-└── icon.tsx           # Icon wrapper
+├── index.ts # Barrel exports
+├── header.tsx # Site header
+├── footer.tsx # Site footer
+├── icon.tsx # Icon wrapper
+├── tracked-link.tsx # PostHog-tracked links
+├── obfuscated-contact.tsx # Email/phone obfuscation
+└── ...
 
-content/               # Blog content (to be created)
+content/ # Blog content
 └── posts/
-    └── *.mdx
-```
+└── \*.mdx
+\`\`\`
 
 ## Coding Conventions
 
@@ -91,9 +101,9 @@ content/               # Blog content (to be created)
 
 ### Naming
 
-- Components: PascalCase (`BlogPost.tsx`)
-- Utilities: camelCase (`formatDate.ts`)
-- Routes: kebab-case (`/blog/my-first-post`)
+- Components: PascalCase (\`BlogPost.tsx\`)
+- Utilities: camelCase (\`formatDate.ts\`)
+- Routes: kebab-case (\`/blog/my-first-post\`)
 
 ## Style Guide
 
@@ -114,90 +124,76 @@ content/               # Blog content (to be created)
 **Currently Implemented:**
 | Usage | Font | Variable |
 |-------|------|----------|
-| Headings | Montserrat | `--font-montserrat` |
-| Body | PT Serif | `--font-pt-serif` |
-
-**To align with brand guidelines**, add Roboto to `app/fonts.ts`:
-
-```ts
-import { Roboto } from "next/font/google";
-
-export const roboto = Roboto({
-  weight: ["400", "500", "700"],
-  variable: "--font-roboto",
-  subsets: ["latin"],
-});
-```
-
-**Tailwind extend:**
-
-```js
-fontFamily: {
-  roboto: ["var(--font-roboto)", "sans-serif"],
-}
-```
+| Headings | Montserrat | \`--font-montserrat\` |
+| Body | PT Serif | \`--font-pt-serif\` |
 
 ### Color Palette
 
 **Brand Color (per PDF):**
 | Name | Hex | RGB | Usage |
 |------|-----|-----|-------|
-| **WarnerWare Blue** | `#277CEA` | rgb(39, 124, 234) | Primary brand color, CTAs, links, accents |
+| **WarnerWare Blue** | \`#277CEA\` | rgb(39, 124, 234) | Primary brand color, CTAs, links, accents |
 
 **Recommended Palette:**
 | Name | Hex | Tailwind Class | Usage |
 |------|-----|----------------|-------|
-| Brand Blue | `#277CEA` | `warnerware-blue` | Primary actions, links |
-| Dark | `#1a1a1a` | `gray-900` | Backgrounds, headings |
-| Gray | `#6b7280` | `gray-500` | Body text, secondary |
-| Light | `#f5f5f5` | `gray-100` | Section backgrounds |
-| White | `#ffffff` | `white` | Cards, content areas |
-
-**Currently used:** `blue-500` (`#3b82f6`) — close but not exact brand color.
-
-**To add brand color to `tailwind.config.ts`:**
-
-```js
-theme: {
-  extend: {
-    colors: {
-      warnerware: {
-        blue: '#277CEA',
-        'blue-light': '#4a94f0',
-        'blue-dark': '#1e62bb',
-      },
-    },
-  },
-}
-```
-
-**CSS Variables (add to `globals.css`):**
-
-```css
-:root {
-  --warnerware-blue: #277cea;
-}
-```
+| Brand Blue | \`#277CEA\` | \`warnerware-blue\` | Primary actions, links |
+| Dark | \`#1a1a1a\` | \`gray-900\` | Backgrounds, headings |
+| Gray | \`#6b7280\` | \`gray-500\` | Body text, secondary |
+| Light | \`#f5f5f5\` | \`gray-100\` | Section backgrounds |
+| White | \`#ffffff\` | \`white\` | Cards, content areas |
 
 ### Component Conventions
 
-- Export named components, not default, from `components/`
+- Export named components, not default, from \`components/\`
 - Keep components focused and composable
-- Use `clsx` for conditional class names
+- Use \`clsx\` for conditional class names
 
 ### Data Patterns
 
 - Store static content data in JSON or MDX files
 - Use Next.js data fetching patterns (Server Components)
 
+## Analytics & Tracking
+
+PostHog is configured with:
+
+- **Exception tracking:** Auto-captures JS errors
+- **Performance tracking:** Web Vitals metrics
+- **Custom events:** Use \`TrackedLink\` component for click tracking
+
+\`\`\`tsx
+// Example: Track resume downloads
+<TrackedLink
+href="/resume.pdf"
+eventName="resume_downloaded"
+eventProperties={{ source: "resume_page" }}
+
+> Download
+> </TrackedLink>
+> \`\`\`
+
 ## Commands
 
-```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run ESLint
-```
+\`\`\`bash
+npm run dev # Start development server
+npm run build # Build for production
+npm run start # Start production server
+npm run lint # Run ESLint
+npm run lint:fix # Fix ESLint issues
+npm run typecheck # Run TypeScript compiler
+npm run test # Run tests (watch mode)
+npm run test:run # Run tests (single run)
+\`\`\`
+
+## CI Pipeline
+
+GitHub Actions runs on push/PR to \`main\`:
+
+1. **Lint** — ESLint with zero warnings
+2. **Test** — Vitest unit tests
+3. **Type Check** — TypeScript compiler
+4. **Build** — Next.js production build
 
 ## Notes for AI Agents
 
@@ -206,3 +202,5 @@ npm run lint     # Run ESLint
 - Keep the portfolio content intact while adding blog functionality
 - PostHog is used for analytics - consider tracking blog-specific events
 - Prioritize performance and SEO for blog content
+- Use \`TrackedLink\` for any links that should be tracked
+- Add JSON-LD structured data to important pages for SEO
