@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { siGithub, siLinkedin, siX } from "simple-icons";
-import { Icon } from "@/components/icon";
+import { Icon, ObfuscatedEmail } from "@/components";
 import { getAllPosts, formatDate } from "@/lib/content";
 import { ArrowRight, Mail } from "lucide-react";
 
@@ -47,13 +47,14 @@ export default async function Home() {
                 View Resume
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <a
-                href="mailto:bfwarner@gmail.com"
+              <ObfuscatedEmail
+                user="bfwarner"
+                domain="gmail.com"
                 className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-full hover:border-gray-900 hover:text-gray-900 transition-colors font-medium"
               >
                 <Mail className="w-4 h-4" />
                 Get in Touch
-              </a>
+              </ObfuscatedEmail>
             </div>
 
             {/* Social Links */}
@@ -293,13 +294,14 @@ export default async function Home() {
             interesting projects, or just connecting with fellow engineers.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="mailto:bfwarner@gmail.com"
+            <ObfuscatedEmail
+              user="bfwarner"
+              domain="gmail.com"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-full hover:bg-gray-100 transition-colors font-medium text-lg"
             >
               <Mail className="w-5 h-5" />
-              bfwarner@gmail.com
-            </a>
+              Get in Touch
+            </ObfuscatedEmail>
           </div>
         </div>
       </section>
