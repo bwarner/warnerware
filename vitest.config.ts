@@ -9,10 +9,13 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./vitest.setup.tsx"],
     include: ["**/*.test.{ts,tsx}"],
+    exclude: ["**/node_modules/**"],
   },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./"),
+      react: path.resolve(__dirname, "node_modules/react"),
+      "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
     },
   },
 });

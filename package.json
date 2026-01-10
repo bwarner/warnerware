@@ -22,11 +22,13 @@
     "@next/mdx": "^16.1.1",
     "@tailwindcss/postcss": "^4.1.18",
     "clsx": "^2.1.1",
+    "codehike": "^1.0.7",
     "lucide-react": "^0.400.0",
     "next": "^15.5.9",
     "posthog-js": "^1.316.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "remark-gfm": "^4.0.1",
     "simple-icons": "^12.4.0"
   },
   "lint-staged": {
