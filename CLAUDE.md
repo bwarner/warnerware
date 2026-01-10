@@ -26,7 +26,8 @@ The site currently features:
 - Experience/work history timeline
 - Skills showcase
 - Tools, Databases, and Services sections
-- Resume page with JSON-LD structured data
+- Resume page with JSON-LD structured data (Person schema)
+- Homepage with JSON-LD structured data (WebSite + Person schemas)
 - Blog section (MDX-based)
 
 ## Transformation Goals
@@ -43,7 +44,7 @@ The site is being evolved from a static portfolio to a **blog-like personal site
 
 ### Technical Improvements
 
-- [x] Dynamic routing for blog posts (\`/blog/[slug]\`)
+- [x] Dynamic routing for blog posts (`/blog/[slug]`)
 - [x] Static generation for blog content
 - [x] SEO optimization (meta tags, Open Graph, structured data)
 - [ ] Reading time estimates
@@ -59,36 +60,36 @@ The site is being evolved from a static portfolio to a **blog-like personal site
 
 ## File Structure
 
-\`\`\`
-long_resume.md # resume
+```
+long_resume.md         # resume
 app/
-├── page.tsx # Homepage (portfolio content)
-├── layout.tsx # Root layout
-├── globals.css # Global styles (Tailwind v4)
-├── providers.tsx # PostHog provider
-├── fonts.ts # Font configuration
-├── blog/ # Blog section
-│ ├── page.tsx # Blog index
-│ └── [slug]/
-│ └── page.tsx # Individual post
+├── page.tsx           # Homepage (portfolio content)
+├── layout.tsx         # Root layout
+├── globals.css        # Global styles (Tailwind v4)
+├── providers.tsx      # PostHog provider
+├── fonts.ts           # Font configuration
+├── blog/              # Blog section
+│   ├── page.tsx       # Blog index
+│   └── [slug]/
+│       └── page.tsx   # Individual post
 ├── resume/
-│ └── page.tsx # Resume with JSON-LD
-├── experience.json # Work history data
+│   └── page.tsx       # Resume with JSON-LD
+├── experience.json    # Work history data
 └── ...
 
 components/
-├── index.ts # Barrel exports
-├── header.tsx # Site header
-├── footer.tsx # Site footer
-├── icon.tsx # Icon wrapper
-├── tracked-link.tsx # PostHog-tracked links
-├── obfuscated-contact.tsx # Email/phone obfuscation
+├── index.ts           # Barrel exports
+├── header.tsx         # Site header
+├── footer.tsx         # Site footer
+├── icon.tsx           # Icon wrapper
+├── tracked-link.tsx   # PostHog-tracked links
+├── obfuscated-contact.tsx  # Email/phone obfuscation
 └── ...
 
-content/ # Blog content
+content/               # Blog content
 └── posts/
-└── \*.mdx
-\`\`\`
+    └── *.mdx
+```
 
 ## Coding Conventions
 
@@ -101,9 +102,9 @@ content/ # Blog content
 
 ### Naming
 
-- Components: PascalCase (\`BlogPost.tsx\`)
-- Utilities: camelCase (\`formatDate.ts\`)
-- Routes: kebab-case (\`/blog/my-first-post\`)
+- Components: PascalCase (`BlogPost.tsx`)
+- Utilities: camelCase (`formatDate.ts`)
+- Routes: kebab-case (`/blog/my-first-post`)
 
 ## Style Guide
 
@@ -124,30 +125,30 @@ content/ # Blog content
 **Currently Implemented:**
 | Usage | Font | Variable |
 |-------|------|----------|
-| Headings | Montserrat | \`--font-montserrat\` |
-| Body | PT Serif | \`--font-pt-serif\` |
+| Headings | Montserrat | `--font-montserrat` |
+| Body | PT Serif | `--font-pt-serif` |
 
 ### Color Palette
 
 **Brand Color (per PDF):**
 | Name | Hex | RGB | Usage |
 |------|-----|-----|-------|
-| **WarnerWare Blue** | \`#277CEA\` | rgb(39, 124, 234) | Primary brand color, CTAs, links, accents |
+| **WarnerWare Blue** | `#277CEA` | rgb(39, 124, 234) | Primary brand color, CTAs, links, accents |
 
 **Recommended Palette:**
 | Name | Hex | Tailwind Class | Usage |
 |------|-----|----------------|-------|
-| Brand Blue | \`#277CEA\` | \`warnerware-blue\` | Primary actions, links |
-| Dark | \`#1a1a1a\` | \`gray-900\` | Backgrounds, headings |
-| Gray | \`#6b7280\` | \`gray-500\` | Body text, secondary |
-| Light | \`#f5f5f5\` | \`gray-100\` | Section backgrounds |
-| White | \`#ffffff\` | \`white\` | Cards, content areas |
+| Brand Blue | `#277CEA` | `warnerware-blue` | Primary actions, links |
+| Dark | `#1a1a1a` | `gray-900` | Backgrounds, headings |
+| Gray | `#6b7280` | `gray-500` | Body text, secondary |
+| Light | `#f5f5f5` | `gray-100` | Section backgrounds |
+| White | `#ffffff` | `white` | Cards, content areas |
 
 ### Component Conventions
 
-- Export named components, not default, from \`components/\`
+- Export named components, not default, from `components/`
 - Keep components focused and composable
-- Use \`clsx\` for conditional class names
+- Use `clsx` for conditional class names
 
 ### Data Patterns
 
@@ -160,35 +161,35 @@ PostHog is configured with:
 
 - **Exception tracking:** Auto-captures JS errors
 - **Performance tracking:** Web Vitals metrics
-- **Custom events:** Use \`TrackedLink\` component for click tracking
+- **Custom events:** Use `TrackedLink` component for click tracking
 
-\`\`\`tsx
+```tsx
 // Example: Track resume downloads
 <TrackedLink
-href="/resume.pdf"
-eventName="resume_downloaded"
-eventProperties={{ source: "resume_page" }}
-
-> Download
-> </TrackedLink>
-> \`\`\`
+  href="/resume.pdf"
+  eventName="resume_downloaded"
+  eventProperties={{ source: "resume_page" }}
+>
+  Download
+</TrackedLink>
+```
 
 ## Commands
 
-\`\`\`bash
-npm run dev # Start development server
-npm run build # Build for production
-npm run start # Start production server
-npm run lint # Run ESLint
-npm run lint:fix # Fix ESLint issues
-npm run typecheck # Run TypeScript compiler
-npm run test # Run tests (watch mode)
-npm run test:run # Run tests (single run)
-\`\`\`
+```bash
+npm run dev        # Start development server
+npm run build      # Build for production
+npm run start      # Start production server
+npm run lint       # Run ESLint
+npm run lint:fix   # Fix ESLint issues
+npm run typecheck  # Run TypeScript compiler
+npm run test       # Run tests (watch mode)
+npm run test:run   # Run tests (single run)
+```
 
 ## CI Pipeline
 
-GitHub Actions runs on push/PR to \`main\`:
+GitHub Actions runs on push/PR to `main`:
 
 1. **Lint** — ESLint with zero warnings
 2. **Test** — Vitest unit tests
@@ -202,5 +203,5 @@ GitHub Actions runs on push/PR to \`main\`:
 - Keep the portfolio content intact while adding blog functionality
 - PostHog is used for analytics - consider tracking blog-specific events
 - Prioritize performance and SEO for blog content
-- Use \`TrackedLink\` for any links that should be tracked
+- Use `TrackedLink` for any links that should be tracked
 - Add JSON-LD structured data to important pages for SEO
