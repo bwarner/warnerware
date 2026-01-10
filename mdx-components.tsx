@@ -2,6 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import Link from "next/link";
 import { HTMLAttributes, AnchorHTMLAttributes, ImgHTMLAttributes } from "react";
+import { Code } from "@/components/code";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -122,6 +123,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Next.js components available in MDX
     Image,
     Link,
+    // Code Hike syntax highlighting
+    Code,
     ...components,
   };
 }
