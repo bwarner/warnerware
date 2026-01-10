@@ -74,51 +74,114 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
+  // JSON-LD structured data for BlogPosting (Google Rich Results)
+  const blogPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: metadata.title,
+    description: metadata.description,
+    datePublished: metadata.date,
+    dateModified: metadata.updated || metadata.date,
+    author: {
+      "@type": "Person",
+      name: "Byron Warner",
+      url: "https://warnerware.com",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Byron Warner",
+      url: "https://warnerware.com",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://warnerware.com/blog/${slug}`,
+    },
+    url: `https://warnerware.com/blog/${slug}`,
+    ...(metadata.image && { image: metadata.image }),
+    ...(metadata.tags && { keywords: metadata.tags.join(", ") }),
+  };
+
+  // Breadcrumb JSON-LD for navigation rich results
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://warnerware.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://warnerware.com/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: metadata.title,
+        item: `https://warnerware.com/blog/${slug}`,
+      },
+    ],
+  };
+
   return (
-    <main className="min-h-screen px-6 py-12">
-      <article className="mx-auto max-w-3xl">
-        {/* Back link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 mb-8 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to blog
-        </Link>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <main className="min-h-screen px-6 py-12">
+        <article className="mx-auto max-w-3xl">
+          {/* Back link */}
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 mb-8 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to blog
+          </Link>
 
-        {/* Post header */}
-        <header className="mb-8 pb-8 border-b border-gray-100">
-          <time className="text-sm text-gray-500">
-            {formatDate(metadata.date)}
-            {metadata.updated && (
-              <span className="ml-2">
-                (Updated: {formatDate(metadata.updated)})
-              </span>
-            )}
-          </time>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight font-montserrat">
-            {metadata.title}
-          </h1>
-          <p className="mt-4 text-xl text-gray-600">{metadata.description}</p>
-          {metadata.tags && metadata.tags.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {metadata.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-block px-2 py-1 text-xs font-medium bg-gray-100 text-gray-600 rounded"
-                >
-                  {tag}
+          {/* Post header */}
+          <header className="mb-8 pb-8 border-b border-gray-100">
+            <time className="text-sm text-gray-500">
+              {formatDate(metadata.date)}
+              {metadata.updated && (
+                <span className="ml-2">
+                  (Updated: {formatDate(metadata.updated)})
                 </span>
-              ))}
-            </div>
-          )}
-        </header>
+              )}
+            </time>
+            <h1 className="mt-4 text-4xl font-bold tracking-tight font-montserrat">
+              {metadata.title}
+            </h1>
+            <p className="mt-4 text-xl text-gray-600">{metadata.description}</p>
+            {metadata.tags && metadata.tags.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {metadata.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-block px-2 py-1 text-xs font-medium bg-gray-100 text-gray-600 rounded"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </header>
 
-        {/* Post content */}
-        <div className="prose prose-lg max-w-none">
-          <Content />
-        </div>
-      </article>
-    </main>
+          {/* Post content */}
+          <div className="prose prose-lg max-w-none">
+            <Content />
+          </div>
+        </article>
+      </main>
+    </>
   );
 }
